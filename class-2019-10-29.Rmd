@@ -11,6 +11,8 @@ library(janitor)
 library(readxl)
 library(googlesheets4)
 library(tidyverse)
+library(moderndive)
+library(infer)
 ```
 
 ```{r}
@@ -29,6 +31,18 @@ x
 
 
 train <- read_sheet("1QV7o63fiZdNtMtLQfdwREapf8eYDjpfSRX0dgfNrB8A")
+
+```
+```{r A Tibble $ Model}
+what <- tibble(bead = c(rep("Red", 200), rep("White", 8000)))
+
+what %>%
+  rep_sample_n(size = 25, replace = TRUE, reps = 1000) %>%
+  group_by(replicate) %>%
+  summarize(propred = sum(bead == "Red")/n())
+
+
+
 
 ```
 
