@@ -1,0 +1,34 @@
+---
+title: "class-2019-10-29"
+author: "Minjue Wu"
+date: "10/29/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+library(janitor)
+library(readxl)
+library(googlesheets4)
+library(tidyverse)
+```
+
+```{r}
+sheets_deauth()
+dir.create("raw-data")
+
+sample <- read_sheet("1cgP-e6THVfiW5TJ95QhX3jkNxKvc8Sicp9k_BkSRd2I") %>%
+  mutate(prop_red = red/(red+white)) %>%
+  drop_na()
+
+x <- sample %>%
+  mutate(av = mean(prop_red)) %>%
+  pull(av)
+
+x
+
+
+train <- read_sheet("1QV7o63fiZdNtMtLQfdwREapf8eYDjpfSRX0dgfNrB8A")
+
+```
+
